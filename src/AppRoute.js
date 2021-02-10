@@ -2,6 +2,8 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 import PrivateRoutePsikiater from "./components/PrivateRoutePsikiater";
 import PrivateRoutePasien from "./components/PrivateRoutePasien";
+import PrivateRouteAdmin from "./components/PrivateRouteAdmin";
+import PrivateRoute from "./components/PrivateRoute";
 
 import RegisterPage from "./pages/Register";
 import Login from "./pages/Login";
@@ -22,15 +24,12 @@ import AdminDashboard from "./pages/AdminDashboard";
 const AppRoute = () => {
   return (
     <Switch>
-      <Route path="/chatbox/:roomChat_id/:appointment_id">
+      <PrivateRoute path="/chatbox/:roomChat_id/:appointment_id">
         <Chatbox />
-      </Route>
-      <Route path="/patient-dashboard">
-        <PatientDashboard />
-      </Route>
-      <Route path="/appointment/:psikiater_id" exact>
+      </PrivateRoute>
+      <PrivateRoutePasien path="/appointment/:psikiater_id" exact>
         <Appointment />
-      </Route>
+      </PrivateRoutePasien>
       <Route path="/" exact>
         <Home />
       </Route>
@@ -40,36 +39,36 @@ const AppRoute = () => {
       <Route path="/register">
         <RegisterPage />
       </Route>
-      <Route path="/patient-history" exact>
+      <PrivateRoutePasien path="/patient-history" exact>
         <PatientHistory />
-      </Route>
+      </PrivateRoutePasien>
       <Route path="/search-result" exact>
         <Search />
       </Route>
       <PrivateRoutePsikiater path="/psikiater-dashboard">
         <Psikiater />
       </PrivateRoutePsikiater>
-      <Route path="/checkout-payment/:payment_id" exact>
+      <PrivateRoutePasien path="/checkout-payment/:payment_id" exact>
         <Checkout />
-      </Route>
+      </PrivateRoutePasien>
       <Route path="/profile/:psychiatrist_id" exact>
         <PublicProfilePsychiatrist />
       </Route>
-      <Route path="/profile-me" exact>
+      <PrivateRoutePasien path="/profile-me" exact>
         <ProfilePatient />
-      </Route>
-      <Route path="/patient-dashboard" exact>
+      </PrivateRoutePasien>
+      <PrivateRoutePasien path="/patient-dashboard" exact>
         <PatientDashboard />
-      </Route>
+      </PrivateRoutePasien>
       <Route path="/email-verification" exact>
         <EmailVerification />
       </Route>
-      <Route path="/upload-payment-slip/:payment_id" exact>
+      <PrivateRoutePasien path="/upload-payment-slip/:payment_id" exact>
         <PaymentSlipUpload />
-      </Route>
-      <Route path="/admin-dashboard">
+      </PrivateRoutePasien>
+      <PrivateRouteAdmin path="/admin-dashboard">
         <AdminDashboard />
-      </Route>
+      </PrivateRouteAdmin>
     </Switch>
   );
 };
